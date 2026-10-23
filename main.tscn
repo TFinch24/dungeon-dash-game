@@ -24,3 +24,4 @@ mesh = SubResource("BoxMesh_w4vw0")
 transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 2.6626062, 0)
 
 [node name="Player" parent="." unique_id=153701727 instance=ExtResource("1_ig7tw")]
+speed = 15.0
