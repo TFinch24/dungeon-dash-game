@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://b6ivibjlllo35"]
+
+[ext_resource type="Script" uid="uid://wsropm52aivt" path="res://main.gd" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bt2kbbgyelgfh" path="res://Character Scenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://b78lc4b0ytdah" path="res://Map Scenes/2_door_corner.tscn" id="2_5vw27"]
+[ext_resource type="PackedScene" uid="uid://bjdx3yqwq3m7i" path="res://Map Scenes/4_door__center_room.tscn" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://ehp4hu5cxxfd" path="res://Map Scenes/2_door_x_room.tscn" id="3_kek77"]
+[ext_resource type="PackedScene" uid="uid://8io8sdmqixht" path="res://Map Scenes/2_door_z_room.tscn" id="4_4c57u"]
+[ext_resource type="PackedScene" uid="uid://bvqs3feckrt1b" path="res://Map Scenes/3_door_t_junction.tscn" id="5_efxa6"]
+[ext_resource type="PackedScene" uid="uid://drg8h3tfbcl4u" path="res://Map Scenes/dead_end.tscn" id="7_dg77c"]
+
+[node name="Main" type="Node3D" unique_id=139680998]
+script = ExtResource("1_0xm2m")
+room_scenes = Array[PackedScene]([ExtResource("2_5vw27"), ExtResource("3_kek77"), ExtResource("4_4c57u"), ExtResource("5_efxa6"), ExtResource("2_h2yge"), ExtResource("7_dg77c")])
+
+[node name="Player" parent="." unique_id=153701727 instance=ExtResource("1_ig7tw")]

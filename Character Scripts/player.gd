@@ -26,6 +26,9 @@ extends CharacterBody3D
 # Pull gravity from the project settings (about 9.8)
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
+# --- INTERACTION RAYCAST ---
+@onready var interaction_ray: RayCast3D = $Camera3D/InteractionRay
+
 # Runs once when the player enters the scene
 func _ready() -> void:
 	print("Player ready!")
@@ -76,3 +79,19 @@ func _physics_process(delta: float) -> void:
 
 	# Actually move the player and handle collisions
 	move_and_slide()
+	
+	_raycast_check()
+
+# Interaction Raycast
+func _raycast_check() -> void:
+	# Check if our raycast laser is hitting anything in the 3D world
+	if interaction_ray.is_colliding():
+		var collider = interaction_ray.get_collider()
+		
+		# Check if the object we are looking at belongs to the "interactable" group
+		if collider and collider.is_in_group("interactable"):
+			print("Looking at: ", collider.name)
+			# TODO: Trigger UI prompt here ("Press F to Loot")
+	else:
+		# Not looking at anything interactable
+		pass

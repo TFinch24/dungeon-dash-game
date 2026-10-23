@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://b78lc4b0ytdah"]
 
 [ext_resource type="Script" uid="uid://sp5uwrpvdp8u" path="res://Map Scenes/room.gd" id="1_ht37m"]
+[ext_resource type="PackedScene" uid="uid://og7o78jks77t" path="res://Objects/chest.tscn" id="2_p57h7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pker3"]
 
@@ -53,3 +54,6 @@ material = SubResource("StandardMaterial3D_pker3")
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=974147108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08111763, 3.7037516, 0)
 omni_range = 15.874
+
+[node name="Chest" parent="." unique_id=434123982 instance=ExtResource("2_p57h7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.413698, 0, -8.817995)
