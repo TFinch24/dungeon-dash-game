@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://b6ivibjlllo35"]
 
-[ext_resource type="PackedScene" uid="uid://bjdx3yqwq3m7i" path="res://room.tscn" id="1_0xm2m"]
-[ext_resource type="PackedScene" uid="uid://bt2kbbgyelgfh" path="res://player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://bjdx3yqwq3m7i" path="res://Map Scenes/4_door__center_room.tscn" id="1_0xm2m"]
+[ext_resource type="PackedScene" uid="uid://bt2kbbgyelgfh" path="res://Character Scenes/player.tscn" id="1_ig7tw"]
 
 [node name="Main" type="Node3D" unique_id=139680998]
 
-[node name="Room" parent="." unique_id=1379680680 instance=ExtResource("1_0xm2m")]
+[node name="Room2" parent="." unique_id=1379680680 instance=ExtResource("1_0xm2m")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20, 0, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1713391784]
-transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 2.6626062, 0)
+[node name="Room" parent="." unique_id=1953690720 instance=ExtResource("1_0xm2m")]
 
 [node name="Player" parent="." unique_id=153701727 instance=ExtResource("1_ig7tw")]

@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://drg8h3tfbcl4u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyo2g"]
+
+[node name="DeadEnd" type="Node3D" unique_id=233198655]
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1973385403]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+use_collision = true
+size = Vector3(20, 0.5, 20)
+material = SubResource("StandardMaterial3D_gyo2g")
+
+[node name="Wall" type="CSGBox3D" parent="." unique_id=1214396092]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.75, 2, 0)
+use_collision = true
+size = Vector3(0.5, 4, 20)
+
+[node name="Wall2" type="CSGBox3D" parent="." unique_id=313826946]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.75, 2, 0)
+use_collision = true
+size = Vector3(0.5, 4, 20)
+
+[node name="Wall3" type="CSGBox3D" parent="." unique_id=576615405]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00070515275, 2, 9.74)
+use_collision = true
+size = Vector3(19, 4, 0.5)
+
+[node name="Wall4" type="CSGBox3D" parent="." unique_id=1302969054]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.009276867, 2, -9.752213)
+use_collision = true
+size = Vector3(19, 4, 0.5)
+
+[node name="Door" type="CSGBox3D" parent="Wall4" unique_id=179873831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95269775, 0)
+operation = 2
+size = Vector3(1.5, 2.3, 0.5)
+
+[node name="Ceiling" type="CSGBox3D" parent="." unique_id=1840495972]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, 0)
+use_collision = true
+size = Vector3(20, 0.5, 20)
+material = SubResource("StandardMaterial3D_gyo2g")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1399471683]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08111763, 3.7037516, 0)
+omni_range = 15.874

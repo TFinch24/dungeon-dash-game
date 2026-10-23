@@ -2,7 +2,7 @@
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w4vw0"]
 
-[node name="Room" type="Node3D" unique_id=1379680680]
+[node name="4DoorCenterRoom" type="Node3D" unique_id=1379680680]
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=688800325]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
@@ -55,3 +55,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.25, 0)
 use_collision = true
 size = Vector3(20, 0.5, 20)
 material = SubResource("StandardMaterial3D_w4vw0")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1156082044]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.08111763, 3.7037516, 0)
+omni_range = 15.874
