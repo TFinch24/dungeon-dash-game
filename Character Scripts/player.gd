@@ -56,7 +56,7 @@ func _physics_process(delta: float) -> void:
 		velocity.y -= gravity * delta
 
 	# Read WASD / left stick as a 2D direction
-	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_back")
+	var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 	# Turn that into a 3D direction based on where the player is facing
 	# normalized() keeps diagonal movement from being faster
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()

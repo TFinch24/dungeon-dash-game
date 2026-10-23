@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://drg8h3tfbcl4u"]
 
+[ext_resource type="Script" uid="uid://sp5uwrpvdp8u" path="res://Map Scenes/room.gd" id="1_2ssqa"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gyo2g"]
 
 [node name="DeadEnd" type="Node3D" unique_id=233198655]
+script = ExtResource("1_2ssqa")
+doors = 1
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1973385403]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)

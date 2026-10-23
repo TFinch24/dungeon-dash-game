@@ -1,8 +1,12 @@
 [gd_scene format=3 uid="uid://8io8sdmqixht"]
 
+[ext_resource type="Script" uid="uid://sp5uwrpvdp8u" path="res://Map Scenes/room.gd" id="1_yajbi"]
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ib0wl"]
 
 [node name="2DoorZRoom" type="Node3D" unique_id=1159281654]
+script = ExtResource("1_yajbi")
+doors = 5
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=2095791295]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
