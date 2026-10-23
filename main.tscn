@@ -14,4 +14,3 @@ script = ExtResource("1_0xm2m")
 room_scenes = Array[PackedScene]([ExtResource("2_5vw27"), ExtResource("3_kek77"), ExtResource("4_4c57u"), ExtResource("5_efxa6"), ExtResource("2_h2yge"), ExtResource("7_dg77c")])
 
 [node name="Player" parent="." unique_id=153701727 instance=ExtResource("1_ig7tw")]
-sprintspeed = 10.0
