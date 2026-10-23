@@ -1,14 +1,15 @@
 # ============================================================
-#  DUNGEON DASH
-#  Script:       player.gd
-#  Developers:   Timothy Finch, Tucker Stark
-#  Engine:       Godot 4.7 (GDScript)
-#  Last updated: October 22, 2026
+#   DUNGEON DASH
+#   Script:        player.gd
+#   Developers:    Timothy Finch, Tucker Stark
+#   Engine:        Godot 4.7 (GDScript)
+#   Last updated:  October 23, 2026
 #
-#  Description:
-#  First-person player controller. Handles mouse look,
-#  WASD / left stick movement, gravity, and jumping.
-#  Press Escape to free or recapture the mouse.
+#   Description:
+#   First-person player controller. Handles mouse look,
+#   WASD / left stick movement, gravity, jumping, sprinting,
+#   and hold-to-loot raycast interaction.
+#   Press Escape to free or recapture the mouse.
 # ============================================================
 extends CharacterBody3D
 
@@ -26,8 +27,9 @@ extends CharacterBody3D
 # Pull gravity from the project settings (about 9.8)
 var gravity: float = ProjectSettings.get_setting("physics/3d/default_gravity")
 
-# --- INTERACTION RAYCAST ---
+# --- INTERACTION RAYCAST & STATE ---
 @onready var interaction_ray: RayCast3D = $Camera3D/InteractionRay
+var current_target: Node = null
 
 # Runs once when the player enters the scene
 func _ready() -> void:
@@ -45,6 +47,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		camera.rotate_x(-event.relative.y * mouse_sensitivity)
 		# Limit the pitch so the camera can't flip upside down
 		camera.rotation.x = clampf(camera.rotation.x, deg_to_rad(-89), deg_to_rad(89))
+		
 	# Escape toggles between a free cursor and a captured one
 	if event.is_action_pressed("ui_cancel"):
 		if Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -63,35 +66,59 @@ func _physics_process(delta: float) -> void:
 	# Turn that into a 3D direction based on where the player is facing
 	# normalized() keeps diagonal movement from being faster
 	var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	# Determine current speed (sprint vs normal walk)
+	var current_speed := speed
+	if Input.is_action_pressed("action_sprint"):
+		current_speed = sprintspeed
+
 	# Set horizontal speed (leave velocity.y alone so gravity still works)
-	velocity.x = direction.x * speed
-	velocity.z = direction.z * speed
+	if direction:
+		velocity.x = direction.x * current_speed
+		velocity.z = direction.z * current_speed
+	else:
+		velocity.x = move_toward(velocity.x, 0, current_speed)
+		velocity.z = move_toward(velocity.z, 0, current_speed)
 
 	# Jump only if the button was just pressed and we're standing on something
 	if Input.is_action_just_pressed("action_jump") and is_on_floor():
 		velocity.y = jumpstr
-		
-	# Sprint when the buttong is pressed
-	if Input.is_action_pressed("action_sprint"):
-		# Set the horizontal speed
-		velocity.x = direction.x * sprintspeed
-		velocity.z = direction.z * sprintspeed
 
 	# Actually move the player and handle collisions
 	move_and_slide()
 	
+	# Handle hold-to-loot targeting
 	_raycast_check()
 
-# Interaction Raycast
+# Interaction Raycast & Hold Input Processing
 func _raycast_check() -> void:
-	# Check if our raycast laser is hitting anything in the 3D world
-	if interaction_ray.is_colliding():
+	if interaction_ray and interaction_ray.is_colliding():
 		var collider = interaction_ray.get_collider()
 		
-		# Check if the object we are looking at belongs to the "interactable" group
+		# Check if the object belongs to the "interactable" group
 		if collider and collider.is_in_group("interactable"):
-			print("Looking at: ", collider.name)
-			# TODO: Trigger UI prompt here ("Press F to Loot")
+			# If player shifted aim to a different interactable object, stop looting the old one
+			if current_target != collider:
+				_clear_target()
+				current_target = collider
+			
+			# While holding interact (F key), trigger looting
+			if Input.is_action_pressed("interact"):
+				if current_target.has_method("start_looting"):
+					current_target.start_looting()
+			
+			# If interact was just released while looking at the target, notify chest to cancel
+			if Input.is_action_just_released("interact"):
+				if current_target.has_method("stop_looting"):
+					current_target.stop_looting()
+		else:
+			_clear_target()
 	else:
-		# Not looking at anything interactable
-		pass
+		_clear_target()
+
+# Resets current target and notifies object if looking away mid-hold
+func _clear_target() -> void:
+	if current_target:
+		if current_target.has_method("stop_looting"):
+			current_target.stop_looting()
+		current_target = null
