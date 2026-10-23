@@ -1,27 +1,13 @@
 [gd_scene format=3 uid="uid://b6ivibjlllo35"]
 
+[ext_resource type="PackedScene" uid="uid://bjdx3yqwq3m7i" path="res://room.tscn" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://bt2kbbgyelgfh" path="res://player.tscn" id="1_ig7tw"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_u11ei"]
-size = Vector3(20, 0.5, 20)
-
-[sub_resource type="BoxMesh" id="BoxMesh_w4vw0"]
-size = Vector3(20, 0.5, 20)
 
 [node name="Main" type="Node3D" unique_id=139680998]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2120740896]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=781547001]
-rotation_order = 0
-shape = SubResource("BoxShape3D_u11ei")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1791939147]
-mesh = SubResource("BoxMesh_w4vw0")
+[node name="Room" parent="." unique_id=1379680680 instance=ExtResource("1_0xm2m")]
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1713391784]
 transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.76604444, 0, -0.76604444, 0.64278764, 0, 2.6626062, 0)
 
 [node name="Player" parent="." unique_id=153701727 instance=ExtResource("1_ig7tw")]
-speed = 15.0
